@@ -1,0 +1,13 @@
+- name: Install plugin
+  jenkins_plugin:
+    name: build-pipeline-plugin
+    url_username: "{{admin_user_username}}"
+    url_password: "{{admin_user_password}}"
+    timeout: "{{plugin_install_timeout}}"
+  with_items: "{{ jenkins_plugins }}"
+  notify: restart jenkins
+  tags: ['skip_ansible_lint']
+  register: plugin_result
+  until: plugin_result is success
+  retries: 3
+  delay: 2

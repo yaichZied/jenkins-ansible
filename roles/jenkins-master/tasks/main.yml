@@ -4,3 +4,10 @@
 - name: Download & Install Jenkins
   include: install_jenkins.yaml
   when: jenkins_service_status.stat.exists == false
+
+- name: Unlock Jenkins
+  include: unlock_jenkins.yaml
+  when: jenkins_service_status.stat.exists == false
+
+- name: Install plugins
+  include: install_plugins.yaml
